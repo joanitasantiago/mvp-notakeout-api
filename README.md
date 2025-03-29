@@ -17,6 +17,7 @@ Este sistema tem como objetivo permitir o cadastro de alimentos e receitas, serv
 
 ## Estrutura do Projeto
 
+```
 notakeout-api/
 │
 ├── .venv/                 # Ambiente virtual (não é enviado ao GitHub)
@@ -26,6 +27,7 @@ notakeout-api/
 │
 ├── models/                # Modelos de dados (ex: Alimento, Receita)
 └── routes/                # Arquivos com as rotas da API (ex: /alimentos, /receitas)
+```
 
 ---
 
