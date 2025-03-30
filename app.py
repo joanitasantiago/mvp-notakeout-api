@@ -14,8 +14,9 @@ app.register_blueprint(food_bp)
 def home():
     return "API de Gerenciamento de Refeições - MVP"
 if __name__ == "__main__":
+    from models.recipe import Recipe
+    from models.recipe_food import  RecipeFood
     from models.food import Food
     with app.app_context():
         db.create_all()
     app.run(debug=True)
-
