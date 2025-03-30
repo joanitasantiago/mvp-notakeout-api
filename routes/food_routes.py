@@ -118,3 +118,54 @@ def delete_food(id):
     db.session.commit()
 
     return jsonify({"message": "Alimento deletado com sucesso"}), 200
+
+@food_bp.route("/foods/<int:id>", methods=["PUT"])
+def update_food(id):
+    """
+    Atualizar um alimento existente
+    ---
+    tags:
+      - Alimentos
+    parameters:
+      - name: id
+        in: path
+        type: integer
+        required: true
+        description: ID do alimento a ser atualizado
+      - in: body
+        name: body
+        required: true
+        schema:
+          type: object
+          properties:
+            name:
+              type: string
+            category:
+              type: string
+            nutritional_value:
+              type: string
+            unit:
+              type: string
+            in_stock:
+              type: boolean
+    responses:
+      200:
+        description: Alimento atualizado com sucesso
+      404:
+        description: Alimento não encontrado
+    """
+    data = request.get_json()
+    food = Food.query.get(id)
+
+    if not food:
+        return jsonify({"message": "Alimento não encontrado"}), 404
+
+    food.name = data.get("name", food.name)
+    food.category = data.get("category", food.category)
+    food.nutritional_value = data.get("nutritional_value", food.nutritional_value)
+    food.unit = data.get("unit", food.unit)
+    food.in_stock = data.get("in_stock", food.in_stock)
+
+    db.session.commit()
+
+    return jsonify(food_schema(food)), 200
