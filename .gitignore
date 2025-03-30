@@ -1,0 +1,13 @@
+# Ambiente virtual
+.venv/
+
+# Banco de dados local do Flask
+instance/
+
+# Arquivos do sistema
+__pycache__/
+*.pyc
+.DS_Store
+
+# Configs do VS Code
+.vscode/
