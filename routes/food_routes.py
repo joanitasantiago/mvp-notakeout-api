@@ -62,3 +62,59 @@ def get_all_foods():
     foods = Food.query.all()
     result = foods_schema(foods)
     return jsonify(result), 200
+
+@food_bp.route("/foods/<int:id>", methods=["GET"])
+def get_food_by_id(id):
+    """
+    Buscar um alimento pelo ID
+    ---
+    tags:
+      - Alimentos
+    parameters:
+      - name: id
+        in: path
+        type: integer
+        required: true
+        description: ID do alimento a ser buscado
+    responses:
+      200:
+        description: Alimento encontrado com sucesso
+      404:
+        description: Alimento não encontrado
+    """
+    food = Food.query.get(id)
+
+    if not food:
+        return jsonify({"message": "Alimento não encontrado"}), 404
+
+    return jsonify(food_schema(food)), 200
+
+
+@food_bp.route("/foods/<int:id>", methods=["DELETE"])
+def delete_food(id):
+    """
+    Deletar um alimento pelo ID
+    ---
+    tags:
+      - Alimentos
+    parameters:
+      - name: id
+        in: path
+        type: integer
+        required: true
+        description: ID do alimento a ser deletado
+    responses:
+      200:
+        description: Alimento deletado com sucesso
+      404:
+        description: Alimento não encontrado
+    """
+    food = Food.query.get(id)
+
+    if not food:
+        return jsonify({"message": "Alimento não encontrado"}), 404
+
+    db.session.delete(food)
+    db.session.commit()
+
+    return jsonify({"message": "Alimento deletado com sucesso"}), 200
