@@ -2,6 +2,8 @@ from flask import Blueprint, request, jsonify
 from models.food import Food
 from database import db
 from schemas.food_schema import food_schema
+from schemas.food_schema import foods_schema
+
 
 food_bp = Blueprint("food_bp", __name__)
 
@@ -45,3 +47,18 @@ def create_food():
     db.session.commit()
 
     return jsonify(food_schema(new_food)), 201
+
+@food_bp.route("/foods", methods=["GET"])
+def get_all_foods():
+    """
+    Listar todos os alimentos cadastrados
+    ---
+    tags:
+      - Alimentos
+    responses:
+      200:
+        description: Lista de alimentos retornada com sucesso
+    """
+    foods = Food.query.all()
+    result = foods_schema(foods)
+    return jsonify(result), 200
