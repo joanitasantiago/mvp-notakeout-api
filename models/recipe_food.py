@@ -5,6 +5,7 @@ from database import db
 # Um alimento pode estar em várias receitas
 # Relacionamento muitos-para-muitos
 # Criar a tabela recipe_food para intermediar a ligação entre alimentos e receitas
+# No SQLAlchemy, para relacionamentos many-to-many, a tabela intermediária é obrigatória
 
 class RecipeFood(db.Model):
 

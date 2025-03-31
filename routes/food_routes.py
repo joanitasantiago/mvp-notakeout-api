@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
-from models.food import Food
 from database import db
+from models.food import Food
 from schemas.food_schema import food_schema
 from schemas.food_schema import foods_schema
 
@@ -89,36 +89,6 @@ def get_food_by_id(id):
 
     return jsonify(food_schema(food)), 200
 
-
-@food_bp.route("/foods/<int:id>", methods=["DELETE"])
-def delete_food(id):
-    """
-    Deletar um alimento pelo ID
-    ---
-    tags:
-      - Alimentos
-    parameters:
-      - name: id
-        in: path
-        type: integer
-        required: true
-        description: ID do alimento a ser deletado
-    responses:
-      200:
-        description: Alimento deletado com sucesso
-      404:
-        description: Alimento não encontrado
-    """
-    food = Food.query.get(id)
-
-    if not food:
-        return jsonify({"message": "Alimento não encontrado"}), 404
-
-    db.session.delete(food)
-    db.session.commit()
-
-    return jsonify({"message": "Alimento deletado com sucesso"}), 200
-
 @food_bp.route("/foods/<int:id>", methods=["PUT"])
 def update_food(id):
     """
@@ -169,3 +139,33 @@ def update_food(id):
     db.session.commit()
 
     return jsonify(food_schema(food)), 200
+
+
+@food_bp.route("/foods/<int:id>", methods=["DELETE"])
+def delete_food(id):
+    """
+    Deletar um alimento pelo ID
+    ---
+    tags:
+      - Alimentos
+    parameters:
+      - name: id
+        in: path
+        type: integer
+        required: true
+        description: ID do alimento a ser deletado
+    responses:
+      200:
+        description: Alimento deletado com sucesso
+      404:
+        description: Alimento não encontrado
+    """
+    food = Food.query.get(id)
+
+    if not food:
+        return jsonify({"message": "Alimento não encontrado"}), 404
+
+    db.session.delete(food)
+    db.session.commit()
+
+    return jsonify({"message": "Alimento deletado com sucesso"}), 200
