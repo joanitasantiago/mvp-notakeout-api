@@ -1,8 +1,11 @@
 from flask import Blueprint, request, jsonify
+from flask import make_response
 from database import db
 from models.menu import Menu
 from models.menu_recipe import MenuRecipe
 from models.recipe import Recipe
+from services.shopping_list_service import generate_shopping_list
+from services.shopping_list_pdf_service import generate_shopping_list_pdf
 from schemas.menu_schema import menu_summary_schema
 from schemas.menu_schema import menu_schema
 from schemas.menu_schema import menus_schema
@@ -202,3 +205,72 @@ def update_menu(id):
     db.session.commit()
 
     return jsonify(menu_schema(menu)), 200
+
+@menu_bp.route("/shopping-list/<int:menu_id>", methods=["GET"])
+def get_shopping_list(menu_id):
+    """
+    Gerar lista de compras com base em um menu
+    ---
+    tags:
+      - Menus
+    parameters:
+      - name: menu_id
+        in: path
+        type: integer
+        required: true
+        description: ID do menu para gerar a lista
+    responses:
+      200:
+        description: Lista de compras gerada com sucesso
+      404:
+        description: Menu não encontrado
+    """
+    menu = Menu.query.get(menu_id)
+    if not menu:
+        return jsonify({"message": "Menu não encontrado"}), 404
+
+    items = generate_shopping_list(menu)
+
+    return jsonify({
+        "menu_id": menu.id,
+        "title": menu.title,
+        "items": items
+    }), 200
+
+@menu_bp.route("/menus/<int:menu_id>/pdf", methods=["GET"])
+def get_shopping_list_pdf(menu_id):
+    """
+    Gerar PDF da lista de compras de um menu
+    ---
+    tags:
+      - Menus
+    parameters:
+      - name: menu_id
+        in: path
+        type: integer
+        required: true
+        description: ID do menu para gerar o PDF da lista de compras
+    responses:
+      200:
+        description: PDF gerado com sucesso
+        content:
+          application/pdf:
+            schema:
+              type: string
+              format: binary
+      404:
+        description: Menu não encontrado
+    """
+    menu = Menu.query.get(menu_id)
+    if not menu:
+        return jsonify({"message": "Menu não encontrado"}), 404
+
+    items = generate_shopping_list(menu)
+
+    pdf_data  = generate_shopping_list_pdf(menu, items)
+
+    response = make_response(pdf_data)
+    response.headers["Content-Type"] = "application/pdf"
+    response.headers["Content-Disposition"] = f"attachment; filename=lista_compras_menu_{menu.id}.pdf"
+
+    return response
