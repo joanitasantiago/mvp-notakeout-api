@@ -1,11 +1,13 @@
 from flasgger import Swagger
 from flask import Flask
+from flask_cors import CORS
 from database import db
 from routes.food_routes import food_bp
 from routes.recipe_routes import recipe_bp
 from routes.menu_routes import menu_bp
 
 app = Flask(__name__)
+CORS(app, origins=["http://127.0.0.1:5500"])
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///notakeout.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db.init_app(app)
