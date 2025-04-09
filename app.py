@@ -7,7 +7,7 @@ from routes.recipe_routes import recipe_bp
 from routes.menu_routes import menu_bp
 
 app = Flask(__name__)
-CORS(app, origins=["http://127.0.0.1:5500"])
+CORS(app)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///notakeout.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db.init_app(app)

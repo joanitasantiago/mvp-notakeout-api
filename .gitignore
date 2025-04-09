@@ -11,3 +11,12 @@ __pycache__/
 
 # Configs do VS Code
 .vscode/
+
+#dttc
+.dir-to-text/
+
+.dttc/
+
+*.dttc
+
+.dttcignore
