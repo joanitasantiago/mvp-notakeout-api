@@ -75,7 +75,7 @@ uv pip install -r requirements.txt
 5. Rode o projeto:
    
 ```bash
-python app.py
+uv run app.py
 ```
    
 6. Acesse no navegador:
@@ -105,18 +105,18 @@ cd notakeout-api
 2. Crie o ambiente virtual:
 
 ```bash
-python -m venv venv
+python -m venv .venv
 ```
 
 3. Ative o ambiente virtual:
 
  - No Windows:
      ```bash
-     venv\Scripts\activate
+     .venv\Scripts\activate
      ```
    - No macOS/Linux:
      ```bash
-     source venv/bin/activate
+     source .venv/bin/activate
      ```
 
 4. Instale as dependências:
