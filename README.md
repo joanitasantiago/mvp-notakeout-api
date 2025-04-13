@@ -37,50 +37,53 @@ notakeout-api/
 
 ### Como rodar o projeto usando UV
 
-[UV](https://github.com/astral-sh/uv) é um gerenciador de pacotes rápido e moderno para Python, desenvolvido pela equipe do `astral.sh`. Ele é compatível com `pip`, porém muito mais veloz na instalação de dependências. É uma ótima alternativa ao `pip` e `venv`, especialmente para projetos que querem um ambiente leve e rápido de configurar.
+[UV](https://github.com/astral-sh/uv) é um gerenciador de pacotes rápido e moderno para Python, desenvolvido pela equipe do `astral.sh`. 
+Ele é compatível com `pip`, porém muito mais veloz na instalação de dependências. É uma ótima alternativa ao `pip` e `venv`, especialmente para projetos que querem um ambiente leve e rápido de configurar.
+
 
 > Este projeto oferece suporte ao UV para facilitar a instalação de ambientes e pacotes sem depender de uma instalação manual do Python na sua máquina.  
 > ⚠️ Com o UV, você **não precisa ter o Python instalado previamente**. Ele baixa automaticamente uma versão leve e isolada do Python apenas para este projeto.  
 > Isso evita conflitos de versões do Python e dependências entre diferentes projetos no seu sistema.
 
+
 1. Instale o UV, se ainda não tiver:
    
-   ```bash
-   curl -Ls https://astral.sh/uv/install.sh | bash
-   ```
+```bash
+curl -Ls https://astral.sh/uv/install.sh | bash
+```
    
 3. Clone o repositório:
 
-  ```bash
-  git clone https://github.com/seu-usuario/notakeout-api.git
-  cd notakeout-api
-  ```
+```bash
+git clone https://github.com/seu-usuario/notakeout-api.git
+cd notakeout-api
+```
 
 3. Crie e ative o ambiente virtual:
    
-   ```bash
-   uv venv
-   .venv\Scripts\activate no Windows
-   ```
+```bash
+uv venv
+.venv\Scripts\activate no Windows
+```
 
 3. Instale as dependências:
    
-   ```bash
-   uv pip install -r requirements.txt
-   ```
+```bash
+uv pip install -r requirements.txt
+```
 
 5. Rode o projeto:
    
-   ```bash
-   python app.py
-   ```
+```bash
+python app.py
+```
    
 6. Acesse no navegador:
    
-  ```
-  http://127.0.0.1:5000/
+```
+http://127.0.0.1:5000/
   
-  ```
+```
 
 ---
 
@@ -94,16 +97,16 @@ Caso não deseje usar o UV, será necessário instalar o python antes de começa
 
 1. Clone o repositório:
 
-  ```bash
-  git clone https://github.com/seu-usuario/notakeout-api.git
-  cd notakeout-api
-  ```
+```bash
+git clone https://github.com/seu-usuario/notakeout-api.git
+cd notakeout-api
+```
 
 2. Crie o ambiente virtual:
 
-  ```bash
-   python -m venv venv
-  ```
+```bash
+python -m venv venv
+```
 
 3. Ative o ambiente virtual:
 
@@ -118,22 +121,22 @@ Caso não deseje usar o UV, será necessário instalar o python antes de começa
 
 4. Instale as dependências:
 
-  ```bash
-  pip install -r requirements.txt
-  ```
+```bash
+pip install -r requirements.txt
+```
 
 5. Rode o projeto:
    
-   ```bash
-   python app.py
-   ```
+```bash
+python app.py
+```
 
 7. Acesse no navegador:
 
-  ```
-  http://127.0.0.1:5000/
+```
+http://127.0.0.1:5000/
   
-  ```
+```
 
 ---
 
